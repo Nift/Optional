@@ -1,4 +1,4 @@
-import { Optional, Some, None, GetValues, ConvertAndGetValues, ConvertAndGetValuesAsync } from "../index";
+import { Optional, Some, None, GetValues, ConvertAndGetValues, ConvertAndGetValuesAsync, FirstOrNone, LastOrNone } from "../index";
 
 
 test('should return the some function (match)', () => {
@@ -284,4 +284,18 @@ test('it should filter the optional to none (filterAsync)', () => {
   const valueOrNone = Some(1);
   const filteredValue = valueOrNone.filterAsync(async x => x === 2);
   filteredValue.then(val => expect(val.hasValue).toBe(false));
+});
+
+test('it should retrieve the first element of the array as an optional', () => {
+  const arr = [1, 2, 3];
+  const firstOrNone = FirstOrNone(arr);
+  expect(firstOrNone).toEqual(Some(arr[0]));
+  expect(arr).toEqual([1,2,3]);
+});
+
+test('it should retrieve the last element of the array as an optional', () => {
+  const arr = [1,2,3];
+  const lastOrNone = LastOrNone(arr);
+  expect(lastOrNone).toEqual(Some(arr[arr.length-1]));
+  expect(arr).toEqual([1,2, 3]);
 });

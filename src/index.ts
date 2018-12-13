@@ -132,3 +132,11 @@ export async function ConvertAndGetValuesAsync<A,B>(values : B[], mapFuncAsync: 
   const tmp = await Promise.all(values.map((value: B) => mapFuncAsync(Some(value))));
   return GetValues(tmp);
 }
+
+export function FirstOrNone<T>(values: T[]) : Optional<T> {
+  return values.length > 0 ? Some(values[0]) : None();
+}
+
+export function LastOrNone<T>(values: T[]) : Optional<T> {
+  return values.length > 0 ? Some(values[values.length-1]) : None();
+}
