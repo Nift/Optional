@@ -40,11 +40,6 @@ export class Optional<T> {
     );
   }
 
-  ifNone(func: (() => T) | T): Optional<T> {
-    if (this.hasValue) return new Optional(this.value);
-    else return new Optional<T>(func instanceof Function ? func() : func);
-  }
-
   mapAsync<TResult>(
     mapFunc: (value: T) => Promise<TResult>
   ): Promise<Optional<TResult>> {
@@ -55,6 +50,16 @@ export class Optional<T> {
       },
       async () => new Optional<TResult>(undefined)
     );
+  }
+
+  ifNone(func: (() => T) | T): Optional<T> {
+    if (this.hasValue) return new Optional(this.value);
+    else return new Optional<T>(func instanceof Function ? func() : func);
+  }
+
+  async ifNoneAsync(func: (() => Promise<T>) | T): Promise<Optional<T>> {
+    if (this.hasValue) return new Optional(this.value);
+    else return new Optional<T>(func instanceof Function ? await func() : func);
   }
 
   filter(predicate: (value: T) => boolean): Optional<T> {
