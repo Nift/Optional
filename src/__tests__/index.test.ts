@@ -100,7 +100,7 @@ test("should be mapped to different type (map)", () => {
 });
 
 test("should be able to map a None optional (map)", () => {
-  const valueOrNone = new Optional(undefined);
+  const valueOrNone = new Optional<number>(undefined);
   expect(valueOrNone.hasValue).toBe(false);
   const mappedOrNone = valueOrNone.map(a => a * 2);
   expect(mappedOrNone.hasValue).toBe(false);
@@ -121,7 +121,7 @@ test("should be mapped to different type (mapAsync)", () => {
 });
 
 test("should be able to map a None optional (mapAsync)", () => {
-  const valueOrNone = new Optional(undefined);
+  const valueOrNone = new Optional<number>(undefined);
   expect(valueOrNone.hasValue).toBe(false);
   valueOrNone
     .mapAsync(async a => a * 2)
@@ -141,7 +141,7 @@ test("should be flatmapped to different type (flatMap)", () => {
 });
 
 test("should be able to flatmap a None optional (flatMap)", () => {
-  const valueOrNone = new Optional(undefined);
+  const valueOrNone = new Optional<number>(undefined);
   expect(valueOrNone.hasValue).toBe(false);
   const mappedOrNone = valueOrNone.flatMap(a => Some(a * 2));
   expect(mappedOrNone.hasValue).toBe(false);
@@ -162,7 +162,7 @@ test("should be flatmapped to different type (flatMapAsync)", () => {
 });
 
 test("should be able to flatmap a None optional (flatMapAsync)", () => {
-  const valueOrNone = new Optional(undefined);
+  const valueOrNone = new Optional<number>(undefined);
   expect(valueOrNone.hasValue).toBe(false);
   valueOrNone
     .flatMapAsync(async a => Some(a * 2))
@@ -194,7 +194,7 @@ test("should return the value (valueOr)", () => {
 });
 
 test("should return alternative value (valueOr)", () => {
-  const valueOrNone = new Optional(undefined);
+  const valueOrNone = new Optional<string>(undefined);
   expect(valueOrNone.valueOr("different")).toBe("different");
 });
 
@@ -222,7 +222,7 @@ test("should return the value (valueOrAsync)", () => {
 });
 
 test("should return alternative value (valueOrAsync)", () => {
-  const valueOrNone = new Optional(undefined);
+  const valueOrNone = new Optional<string>(undefined);
   valueOrNone
     .valueOrAsync(new Promise(resolve => resolve("different")))
     .then(val => expect(val).toBe("different"));

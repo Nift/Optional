@@ -25,19 +25,11 @@
     "noImplicitReturns": true,
     "pretty": true,
     "lib": ["es6", "dom"],
-    "types": ["reflect-metadata"],
+    "types": ["reflect-metadata", "jest"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "typeRoots": [
-    "src/types",
-    "node_modules/@types"
-  ],
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/__tests__"
-  ]
+  "typeRoots": ["src/types", "node_modules/@types"],
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/__tests__"]
 }
