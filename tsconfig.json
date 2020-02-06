@@ -4,7 +4,6 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "allowJs": false,
-    "jsx": "react",
     "importHelpers": true,
     "alwaysStrict": true,
     "strictNullChecks": true,
