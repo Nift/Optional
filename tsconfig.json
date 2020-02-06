@@ -4,7 +4,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "allowJs": false,
-    "importHelpers": true,
+    "importHelpers": false,
     "alwaysStrict": true,
     "strictNullChecks": true,
     "watch": false,
