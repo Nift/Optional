@@ -106,7 +106,7 @@ export class Optional<T> {
       | (() => Promise<T>)
   ): Promise<T> {
     if (this.hasValue)
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         resolve(this.value);
       });
     if (alternative instanceof Error) throw alternative;
@@ -139,13 +139,19 @@ export function Some<T>(value: T | undefined | null): Optional<T> {
   return new Optional<T>(value);
 }
 
+export async function SomeAsync<T>(
+  value: Promise<T> | Promise<undefined> | Promise<null>
+): Promise<Optional<T>> {
+  return Some(await value);
+}
+
 export function None<T>(): Optional<T> {
   return new Optional<T>(undefined);
 }
 
 export function GetValues<T>(values: Optional<T>[]): T[] {
   let storage: T[] = [];
-  values.forEach(val => {
+  values.forEach((val) => {
     if (val.hasValue) storage.push(val.valueOrFailure());
   });
   return storage;
