@@ -26,7 +26,8 @@
   "private": false,
   "scripts": {
     "build": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "postinstall": "tsc --outDir ./build"
   },
   "devDependencies": {
     "@types/jest": "^25.2.3",
