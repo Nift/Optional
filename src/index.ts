@@ -2,7 +2,7 @@ export class Optional<T> {
   private readonly value: T;
   public readonly hasValue: boolean;
 
-  constructor(value: T | undefined | null) {
+  constructor (value: T | undefined | null) {
     if (value === undefined || value === null) this.hasValue = false;
     else {
       this.hasValue = true;
@@ -114,6 +114,10 @@ export class Optional<T> {
     return alternative;
   }
 
+  val(): T {
+    return this.valueOrFailure();
+  }
+
   valueOrFailure(message?: string): T {
     if (this.hasValue) return this.value;
     throw new Error(message ? message : "There exists no value");
@@ -175,9 +179,9 @@ export async function ConvertAndGetValuesAsync<A, B>(
 }
 
 export function FirstOrNone<T>(values: T[]): Optional<T> {
-  return values.length > 0 ? Some(values[0]) : None();
+  return values.length > 0 ? Some(values[ 0 ]) : None();
 }
 
 export function LastOrNone<T>(values: T[]): Optional<T> {
-  return values.length > 0 ? Some(values[values.length - 1]) : None();
+  return values.length > 0 ? Some(values[ values.length - 1 ]) : None();
 }

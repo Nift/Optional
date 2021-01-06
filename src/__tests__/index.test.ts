@@ -296,9 +296,9 @@ test("should return None optional", () => {
 });
 
 test("should retrieve values (GetValues)", () => {
-  const optionalList = [Some(1), Some(2), Some(3)];
+  const optionalList = [ Some(1), Some(2), Some(3) ];
   const list = GetValues(optionalList);
-  expect(list).toEqual([1, 2, 3]);
+  expect(list).toEqual([ 1, 2, 3 ]);
 });
 
 test("should handle empty list (GetValues)", () => {
@@ -308,16 +308,16 @@ test("should handle empty list (GetValues)", () => {
 });
 
 test("should convert and return a list (ConvertAndGetValues)", () => {
-  const optionalList = [1, 2, 3];
+  const optionalList = [ 1, 2, 3 ];
   const list = ConvertAndGetValues(optionalList, val => val.map(a => a + ""));
-  expect(list).toEqual(["1", "2", "3"]);
+  expect(list).toEqual([ "1", "2", "3" ]);
 });
 
 test("should convert and return a list (ConvertAndGetValuesAsync)", () => {
-  const optionalList = [1, 2, 3];
+  const optionalList = [ 1, 2, 3 ];
   ConvertAndGetValuesAsync(optionalList, async val =>
     val.map(a => a + "")
-  ).then(list => expect(list).toEqual(["1", "2", "3"]));
+  ).then(list => expect(list).toEqual([ "1", "2", "3" ]));
 });
 
 test("it should filter the optional (filter)", () => {
@@ -345,17 +345,17 @@ test("it should filter the optional to none (filterAsync)", () => {
 });
 
 test("it should retrieve the first element of the array as an optional", () => {
-  const arr = [1, 2, 3];
+  const arr = [ 1, 2, 3 ];
   const firstOrNone = FirstOrNone(arr);
-  expect(firstOrNone).toEqual(Some(arr[0]));
-  expect(arr).toEqual([1, 2, 3]);
+  expect(firstOrNone).toEqual(Some(arr[ 0 ]));
+  expect(arr).toEqual([ 1, 2, 3 ]);
 });
 
 test("it should retrieve the last element of the array as an optional", () => {
-  const arr = [1, 2, 3];
+  const arr = [ 1, 2, 3 ];
   const lastOrNone = LastOrNone(arr);
-  expect(lastOrNone).toEqual(Some(arr[arr.length - 1]));
-  expect(arr).toEqual([1, 2, 3]);
+  expect(lastOrNone).toEqual(Some(arr[ arr.length - 1 ]));
+  expect(arr).toEqual([ 1, 2, 3 ]);
 });
 
 test("it should convert the value if none is present", () => {
@@ -380,4 +380,16 @@ test("it should be possible to just give value", () => {
   const convertedValueOrNone = valueOrNone.ifNone(1);
   expect(convertedValueOrNone.hasValue).toBe(true);
   expect(convertedValueOrNone.valueOrFailure()).toBe(1);
+});
+
+test("should return the value (val)", () => {
+  const valueOrNone = new Optional("test");
+  expect(valueOrNone.valueOrFailure()).toBe("test");
+});
+
+test("should fail with an error (val)", () => {
+  const valueOrNone = new Optional(undefined);
+  expect(() => {
+    valueOrNone.valueOrFailure();
+  }).toThrowError("There exists no value");
 });
