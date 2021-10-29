@@ -393,3 +393,22 @@ test("should fail with an error (val)", () => {
     valueOrNone.valueOrFailure();
   }).toThrowError("There exists no value");
 });
+
+test("should remains same optional after a tap", () => {
+  const origin = Some(1);
+  const final = origin.tap((a) => (a = 2));
+  expect(origin).toEqual(final);
+  expect(origin.valueOrFailure()).toEqual(final.valueOrFailure());
+});
+
+test("should tap only with given value", () => {
+  let count = 1;
+  Some(2).tap((valid) => (count = valid));
+  expect(count).toEqual(2);
+});
+
+test("should not tap without given value", () => {
+  let count = 1;
+  Some<number>(null).tap((valid) => (count = valid));
+  expect(count).toEqual(1);
+});

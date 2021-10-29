@@ -93,6 +93,8 @@ const valueOrNone = None();
   - Returns the stored value or undefined
 - `valueOrNull`
   - Returns the stored value or null
+- `tap`
+  - Call a method aside only if a value is given, without any modification on the optional (usually for debuging).
 - `toJSON`
   - Return the stored value or null if no value exists. Used with JSON serialization.
 

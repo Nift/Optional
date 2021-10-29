@@ -132,6 +132,11 @@ export class Optional<T> {
     if (this.hasValue) return this.value;
     return null;
   }
+  
+  tap<TResult>(tapFunc: (value: T) => TResult): Optional<T> {
+    if (this.hasValue) tapFunc(this.value);
+    return this;
+  }
 
   toJSON(): T | null {
     if (this.hasValue) return this.value;
