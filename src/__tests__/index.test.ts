@@ -419,3 +419,50 @@ test("should not tap without given value", () => {
   Some<number>(null).tap((valid) => (count = valid));
   expect(count).toEqual(1);
 });
+
+
+test("should return original value, but possible to specify alternative type", () => {
+  const valueOrAlternative = Some("test").valueOrAlternative(1)
+  expect(valueOrAlternative).toBe("test");
+})
+
+test("should return alternative value", () => {
+  const valueOrAlternativeFailed = None().valueOrAlternative(1);
+  expect(valueOrAlternativeFailed).toBe(1);
+})
+
+test("should return alternative function", () => {
+  const valueOrAlternativeFailedFunction = None<string>().valueOrAlternative<() => number>(() => 1);
+  expect(valueOrAlternativeFailedFunction).toBeInstanceOf(Function);
+  if(valueOrAlternativeFailedFunction instanceof Function){
+    expect(valueOrAlternativeFailedFunction()).toBe(1)
+  }
+})
+
+
+test("should return original value, but possible to specify alternative type async", () => {
+  const valueOrAlternative = Some("test");
+  valueOrAlternative
+    .valueOrAlternativeAsync(new Promise(resolve => resolve(1)))
+    .then(val => expect(val).toBe("test"));
+})
+
+test("should return alternative value async ", () => {
+  const valueOrAlternative = None<string>();
+  valueOrAlternative
+    .valueOrAlternativeAsync(new Promise(resolve => resolve(1)))
+    .then(val => expect(val).toBe(1));
+})
+
+test("should return alternative function type async ", () => {
+  const valueOrAlternative = None<string>();
+  valueOrAlternative
+    .valueOrAlternativeAsync(async () => 1)
+    .then(val => {
+        expect(val).toBeInstanceOf(Function);
+        if(val instanceof Function){
+          val().then(val2 => expect(val2).toBe(1))
+        }
+    });
+})
+

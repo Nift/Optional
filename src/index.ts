@@ -128,12 +128,21 @@ export class Optional<T> {
     return undefined;
   }
 
-
   valueOrNull(): T | null {
     if (this.hasValue) return this.value;
     return null;
   }
-  
+
+  valueOrAlternative<TResult>(alternative: TResult): T | TResult {
+    if (this.hasValue) return this.value;
+    return alternative;
+  }
+
+  async valueOrAlternativeAsync<TResult>(alternative: TResult): Promise<T | TResult> {
+    if (this.hasValue) return this.value;
+    return alternative;
+  }
+
   tap<TResult>(tapFunc: (value: T) => TResult): Optional<T> {
     if (this.hasValue) tapFunc(this.value);
     return this;
