@@ -82,7 +82,7 @@ const valueOrNone = None();
 - `filter`
   - Filters the optional by checking if the optional satifies the given predicate. Returns a None option if the value does not satisfy the given predicate.
 - `filterAsync`
-  - Async varaitn of filter.
+  - Async variant of filter.
 - `valueOr`
   - Returns the stored value or the specified alternative. The alternative can be an alternate value of the same type, a function returning a value of the same type, an error or a function throwing an error.
 - `valueOrAsync`
@@ -93,8 +93,12 @@ const valueOrNone = None();
   - Returns the stored value or undefined
 - `valueOrNull`
   - Returns the stored value or null
+- `valueOrAlternative`
+  - Returns the stored value or an alternative value of a customly specified type. Usable in the case where you might want to throw a custom exception or for other reasons change the underlying type. 
+- `valueOrAlternativeAsync`
+  - Async version of `valueOrAlternative`
 - `tap`
-  - Call a method aside only if a value is given, without any modification on the optional (usually for debuging).
+  - Executes the specified function with the value within the Optional if it exists. 
 - `toJSON`
   - Return the stored value or null if no value exists. Used with JSON serialization.
 
