@@ -401,6 +401,13 @@ test("should remains same optional after a tap", () => {
   expect(origin.valueOrFailure()).toEqual(final.valueOrFailure());
 });
 
+test("should remains same optional after a async tap", async () => {
+  const origin = Some(1);
+  const final = await origin.tapAsync(async (a) => (a = 2));
+  expect(origin).toEqual(final);
+  expect(origin.valueOrFailure()).toEqual(final.valueOrFailure());
+});
+
 test("should tap only with given value", () => {
   let count = 1;
   Some(2).tap((valid) => (count = valid));
