@@ -128,6 +128,7 @@ export class Optional<T> {
     return undefined;
   }
 
+
   valueOrNull(): T | null {
     if (this.hasValue) return this.value;
     return null;
@@ -137,6 +138,12 @@ export class Optional<T> {
     if (this.hasValue) tapFunc(this.value);
     return this;
   }
+
+  async tapAsync<TResult>(tapFunc: (value: T) => Promise<TResult>): Promise<Optional<T>> {
+    if (this.hasValue) await tapFunc(this.value);
+    return this;
+  }
+
 
   toJSON(): T | null {
     if (this.hasValue) return this.value;
